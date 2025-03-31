@@ -9,76 +9,76 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             text-align: center;
-            width: 80%;
-            max-width: 600px;
+            width: 100%;
+            max-width: 500px;
         }
         .input-group {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             justify-content: center;
         }
-        input[type="number"], button {
+        input[type="number"] {
             padding: 10px;
             font-size: 14px;
-            height: 10px;
-            width: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 100px;
+            text-align: center;
         }
         .currency-format {
             font-size: 14px;
-            margin-left: 10px;
         }
-        .button-group {
+        .button-group, .class-button-group {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
         }
         button {
+            padding: 10px;
+            font-size: 14px;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border: none;
+            background: #9e9e9e;
+            color: white;
+            border-radius: 5px;
+            flex: 1;
+            min-width: 50px;
+        }
+        #calculate {
+            width: 100%;
+            max-width: 200px;
+            margin-top: 20px;
         }
         #result {
             margin-top: 20px;
-            padding: 20px;
+            padding: 15px;
             border: 1px solid #ddd;
             width: 100%;
-            max-width: 600px;
-            text-align: center;
-            margin-top: 30px;
-        }
-        /* 수업 추가/제거 버튼을 나란히 배치 */
-        .class-button-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        /* 제목 왼쪽 정렬 */
-        .title-left {
+            max-width: 500px;
             text-align: left;
+        }
+        .class-row {
             width: 100%;
         }
-
-        /* [계산하기] 버튼 중앙 배치 */
-        #calculate {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 200px;
-            margin-left: auto;
-            margin-right: auto;
+        @media (max-width: 400px) {
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -90,6 +90,8 @@
             <label>기본급:</label>
             <input type="number" id="base-salary" value="900000">
             <div class="currency-format" id="base-salary-text">90만원</div>
+        </div>
+        <div class="button-group">
             <button id="decrease-base">-5만원</button>
             <button id="increase-base">+5만원</button>
         </div>
@@ -98,6 +100,8 @@
             <label>기타 인센티브:</label>
             <input type="number" id="extra-income" value="0">
             <div class="currency-format" id="extra-income-text">0만원</div>
+        </div>
+        <div class="button-group">
             <button id="decrease-extra">-5만원</button>
             <button id="increase-extra">+5만원</button>
         </div>
