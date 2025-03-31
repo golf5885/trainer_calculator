@@ -21,8 +21,9 @@
             max-width: 500px;
         }
         .input-group {
-            display: flex;
-            flex-wrap: wrap;
+            display: flex;  /* 기존 inline-block → flex로 변경 */
+            flex-direction: row; /* 가로 정렬 */
+            flex-wrap: nowrap;
             align-items: center;
             gap: 10px;
             margin-bottom: 15px;
@@ -30,8 +31,9 @@
         }
         input[type="number"] {
             padding: 10px;
-            font-size: 14px;
-            width: 100px;
+            font-size: 12px;
+            width: 50px;
+            height: 8px;
             text-align: center;
         }
         .currency-format {
@@ -41,12 +43,12 @@
             display: flex;
             justify-content: center;
             gap: 5px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             margin-bottom: 10px;
         }
         button {
             padding: 10px;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             border: none;
             background: #9e9e9e;
@@ -54,6 +56,7 @@
             border-radius: 5px;
             flex: 1;
             min-width: 50px;
+            margin-bottom: 20px;
         }
         #calculate {
             width: 100%;
@@ -64,21 +67,29 @@
             margin-top: 20px;
             padding: 15px;
             border: 1px solid #ddd;
-            width: 100%;
+            width: 80%;
             max-width: 500px;
             text-align: left;
         }
         .class-row {
             width: 100%;
         }
-        @media (max-width: 400px) {
+        @media (max-width: 500px) {
             .input-group {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: nowrap;
                 align-items: stretch;
             }
             button {
                 width: 100%;
             }
+        }
+        input::placeholder {
+            font-size: 9px; /* 기존보다 작게 조정 */
+            color: #999; /* 흐리게 보이도록 설정 (선택사항) */
+        }
+        label{
+            font-size: 14px;
         }
     </style>
 </head>
@@ -88,8 +99,8 @@
         
         <div class="input-group">
             <label>기본급:</label>
-            <input type="number" id="base-salary" value="900000">
             <div class="currency-format" id="base-salary-text">90만원</div>
+            <input type="number" id="base-salary" value="900000">
         </div>
         <div class="button-group">
             <button id="decrease-base">-5만원</button>
@@ -98,8 +109,8 @@
         
         <div class="input-group">
             <label>기타 인센티브:</label>
-            <input type="number" id="extra-income" value="0">
             <div class="currency-format" id="extra-income-text">0만원</div>
+            <input type="number" id="extra-income" value="0">
         </div>
         <div class="button-group">
             <button id="decrease-extra">-5만원</button>
@@ -138,7 +149,7 @@
                 classRow.classList.add("class-row");
                 classRow.innerHTML = `
                     <div class="input-group">
-                        <input type="number" placeholder="수업 단가" class="class-rate" />
+                        <input type="number" placeholder="수업 단가(원)" class="class-rate" />
                         <input type="number" placeholder="수업료(%)" class="class-fee" />
                         <input type="number" placeholder="수업 횟수" class="class-count" />
                         <div class="class-button-group">
