@@ -74,14 +74,14 @@
         .class-row {
             width: 100%;
         }
-        @media (max-width: 500px) {
+        @media (max-width: 400px) {
             .input-group {
                 flex-direction: row;
                 flex-wrap: nowrap;
                 align-items: stretch;
             }
             button {
-                width: 100%;
+                width: 95%;
             }
         }
         input::placeholder {
@@ -137,8 +137,15 @@
             const calculateBtn = document.getElementById("calculate");
             const resultDiv = document.getElementById("result");
 
-            document.getElementById("base-salary").value = 900000;
-            document.getElementById("extra-income").value = 0;
+            document.getElementById("base-salary").addEventListener("input", function () {
+                const value = parseFloat(this.value) || 0;
+                document.getElementById("base-salary-text").innerText = formatCurrency(value);
+            });
+            
+            document.getElementById("extra-income").addEventListener("input", function () {
+                const value = parseFloat(this.value) || 0;
+                document.getElementById("extra-income-text").innerText = formatCurrency(value);
+            });
 
             function formatCurrency(value) {
                 return (value / 10000) + '만원';
@@ -152,10 +159,8 @@
                         <input type="number" placeholder="수업 단가(원)" class="class-rate" />
                         <input type="number" placeholder="수업료(%)" class="class-fee" />
                         <input type="number" placeholder="수업 횟수" class="class-count" />
-                        <div class="class-button-group">
                             <button class="remove-class">-</button>
                             <button class="add-class">+</button>
-                        </div>
                     </div>
                 `;
                 classContainer.appendChild(classRow);
