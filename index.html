@@ -1,169 +1,172 @@
 <!DOCTYPE html>
 <html lang="ko">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FX6T7G5C10"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FX6T7G5C10"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-  gtag('config', 'G-FX6T7G5C10');
-</script>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .container {
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-        }
-        .input-group {
-            display: flex;  /* 기존 inline-block → flex로 변경 */
-            flex-direction: row; /* 가로 정렬 */
-            flex-wrap: nowrap;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            justify-content: center;
-        }
-        input[type="number"] {
-            padding: 10px;
-            font-size: 12px;
-            width: 50px;
-            height: 8px;
-            text-align: center;
-        }
-        .currency-format {
-            font-size: 14px;
-        }
-        .button-group, .class-button-group {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            flex-wrap: nowrap;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px;
-            font-size: 12px;
-            cursor: pointer;
-            border: none;
-            background: #9e9e9e;
-            color: white;
-            border-radius: 5px;
-            flex: 1;
-            min-width: 50px;
-            margin-bottom: 20px;
-        }
-        #calculate {
-            width: 100%;
-            max-width: 200px;
-            margin-top: 20px;
-        }
-        #result {
-            margin-top: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            width: 80%;
-            max-width: 500px;
-            text-align: left;
-        }
-        .class-row {
-            width: 100%;
-        }
-        @media (max-width: 400px) {
+        gtag('config', 'G-FX6T7G5C10');
+    </script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+            .container {
+                text-align: center;
+                width: 100%;
+                max-width: 500px;
+            }
             .input-group {
-                flex-direction: row;
+                display: flex; /* 기존 inline-block → flex로 변경 */
+                flex-direction: row; /* 가로 정렬 */
                 flex-wrap: nowrap;
-                align-items: stretch;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 15px;
+                justify-content: center;
+            }
+            input[type='number'] {
+                padding: 10px;
+                font-size: 12px;
+                width: 50px;
+                height: 8px;
+                text-align: center;
+            }
+            .currency-format {
+                font-size: 14px;
+            }
+            .button-group,
+            .class-button-group {
+                display: flex;
+                justify-content: center;
+                gap: 5px;
+                flex-wrap: nowrap;
+                margin-bottom: 10px;
             }
             button {
-                width: 95%;
+                padding: 10px;
+                font-size: 12px;
+                cursor: pointer;
+                border: none;
+                background: #9e9e9e;
+                color: white;
+                border-radius: 5px;
+                flex: 1;
+                min-width: 50px;
+                margin-bottom: 20px;
             }
-        }
-        input::placeholder {
-            font-size: 9px; /* 기존보다 작게 조정 */
-            color: #999; /* 흐리게 보이도록 설정 (선택사항) */
-        }
-        label{
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>트레이너 급여 계산기</h2>
-        
-        <div class="input-group">
-            <label>기본급:</label>
-            <div class="currency-format" id="base-salary-text">90만원</div>
-            <input type="number" id="base-salary" value="900000">
-        </div>
-        <div class="button-group">
-            <button id="decrease-base">-5만원</button>
-            <button id="increase-base">+5만원</button>
-        </div>
-        
-        <div class="input-group">
-            <label>기타 인센티브:</label>
-            <div class="currency-format" id="extra-income-text">0만원</div>
-            <input type="number" id="extra-income" value="0">
-        </div>
-        <div class="button-group">
-            <button id="decrease-extra">-5만원</button>
-            <button id="increase-extra">+5만원</button>
-        </div>
-        
-        <div id="class-container"></div>
-        
-        <div class="input-group">
-            <label>세금 선택:</label>
-            <input type="radio" id="business-tax" name="tax-type" value="business" checked>
-            <label for="business-tax">사업소득 (3.3%)</label>
-            <input type="radio" id="employee-tax" name="tax-type" value="employee">
-            <label for="employee-tax">근로소득 (9%)</label>
-        </div>
-        
-        <button id="calculate">계산하기</button>
-        <div id="result"></div>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const classContainer = document.getElementById("class-container");
-            const calculateBtn = document.getElementById("calculate");
-            const resultDiv = document.getElementById("result");
-
-            document.getElementById("base-salary").addEventListener("input", function () {
-                const value = parseFloat(this.value) || 0;
-                document.getElementById("base-salary-text").innerText = formatCurrency(value);
-            });
-            
-            document.getElementById("extra-income").addEventListener("input", function () {
-                const value = parseFloat(this.value) || 0;
-                document.getElementById("extra-income-text").innerText = formatCurrency(value);
-            });
-
-            function formatCurrency(value) {
-                return (value / 10000) + '만원';
+            #calculate {
+                width: 100%;
+                max-width: 200px;
+                margin-top: 20px;
             }
+            #result {
+                margin-top: 20px;
+                padding: 15px;
+                border: 1px solid #ddd;
+                width: 80%;
+                max-width: 500px;
+                text-align: left;
+            }
+            .class-row {
+                width: 100%;
+            }
+            @media (max-width: 400px) {
+                .input-group {
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    align-items: stretch;
+                }
+                button {
+                    width: 95%;
+                }
+            }
+            input::placeholder {
+                font-size: 9px; /* 기존보다 작게 조정 */
+                color: #999; /* 흐리게 보이도록 설정 (선택사항) */
+            }
+            label {
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>트레이너 급여 계산기</h2>
 
-            function createClassRow() {
-                const classRow = document.createElement("div");
-                classRow.classList.add("class-row");
-                classRow.innerHTML = `
+            <div class="input-group">
+                <label>기본급:</label>
+                <div class="currency-format" id="base-salary-text">90만원</div>
+                <input type="number" id="base-salary" value="900000" />
+            </div>
+            <div class="button-group">
+                <button id="decrease-base">-5만원</button>
+                <button id="increase-base">+5만원</button>
+            </div>
+
+            <div class="input-group">
+                <label>기타 인센티브:</label>
+                <div class="currency-format" id="extra-income-text">0만원</div>
+                <input type="number" id="extra-income" value="0" />
+            </div>
+            <div class="button-group">
+                <button id="decrease-extra">-5만원</button>
+                <button id="increase-extra">+5만원</button>
+            </div>
+
+            <div id="class-container"></div>
+
+            <div class="input-group">
+                <label>세금 선택:</label>
+                <input type="radio" id="business-tax" name="tax-type" value="business" checked />
+                <label for="business-tax">사업소득 (3.3%)</label>
+                <input type="radio" id="employee-tax" name="tax-type" value="employee" />
+                <label for="employee-tax">근로소득 (9%)</label>
+            </div>
+
+            <button id="calculate">계산하기</button>
+            <div id="result"></div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const classContainer = document.getElementById('class-container');
+                const calculateBtn = document.getElementById('calculate');
+                const resultDiv = document.getElementById('result');
+
+                document.getElementById('base-salary').addEventListener('input', function () {
+                    const value = parseFloat(this.value) || 0;
+                    document.getElementById('base-salary-text').innerText = formatCurrency(value);
+                });
+
+                document.getElementById('extra-income').addEventListener('input', function () {
+                    const value = parseFloat(this.value) || 0;
+                    document.getElementById('extra-income-text').innerText = formatCurrency(value);
+                });
+
+                function formatCurrency(value) {
+                    return value / 10000 + '만원';
+                }
+
+                function createClassRow() {
+                    const classRow = document.createElement('div');
+                    classRow.classList.add('class-row');
+                    classRow.innerHTML = `
                     <div class="input-group">
                         <input type="number" placeholder="수업 단가(원)" class="class-rate" />
                         <input type="number" placeholder="수업료(%)" class="class-fee" />
@@ -172,78 +175,79 @@
                             <button class="add-class">+</button>
                     </div>
                 `;
-                classContainer.appendChild(classRow);
+                    classContainer.appendChild(classRow);
 
-                classRow.querySelector(".remove-class").addEventListener("click", function () {
-                    classRow.remove();
-                });
-                classRow.querySelector(".add-class").addEventListener("click", function () {
-                    // 수업 추가 시 원하는 로직을 추가하면 됩니다.
-                    createClassRow();
-                });
-            }
-
-            createClassRow();
-
-
-            // 기본급 +- 5만원 버튼
-            document.getElementById("decrease-base").addEventListener("click", function () {
-                let baseSalary = parseFloat(document.getElementById("base-salary").value);
-                baseSalary = baseSalary - 50000;
-                document.getElementById("base-salary").value = baseSalary;
-                document.getElementById("base-salary-text").innerText = formatCurrency(baseSalary);
-            });
-
-            document.getElementById("increase-base").addEventListener("click", function () {
-                let baseSalary = parseFloat(document.getElementById("base-salary").value);
-                baseSalary = baseSalary + 50000;
-                document.getElementById("base-salary").value = baseSalary;
-                document.getElementById("base-salary-text").innerText = formatCurrency(baseSalary);
-            });
-
-            // 기타 인센티브 +- 5만원 버튼
-            document.getElementById("decrease-extra").addEventListener("click", function () {
-                let extraIncome = parseFloat(document.getElementById("extra-income").value);
-                extraIncome = extraIncome - 50000;
-                document.getElementById("extra-income").value = extraIncome;
-                document.getElementById("extra-income-text").innerText = formatCurrency(extraIncome);
-            });
-
-            document.getElementById("increase-extra").addEventListener("click", function () {
-                let extraIncome = parseFloat(document.getElementById("extra-income").value);
-                extraIncome = extraIncome + 50000;
-                document.getElementById("extra-income").value = extraIncome;
-                document.getElementById("extra-income-text").innerText = formatCurrency(extraIncome);
-            });
-
-            calculateBtn.addEventListener("click", function () {
-                const baseSalary = parseFloat(document.getElementById("base-salary").value) || 0;
-                const extraIncome = parseFloat(document.getElementById("extra-income").value) || 0;
-                let totalClassIncome = 0;
-
-                document.querySelectorAll(".class-row").forEach(row => {
-                    const rate = parseFloat(row.querySelector(".class-rate").value) || 0;
-                    const fee = (parseFloat(row.querySelector(".class-fee").value) || 0) / 100;
-                    const count = parseInt(row.querySelector(".class-count").value) || 0;
-                    totalClassIncome += rate * fee * count;
-                });
-
-                let totalSalary = baseSalary + totalClassIncome + extraIncome;
-                const taxType = document.querySelector("input[name='tax-type']:checked").value;
-
-                let taxAmount = 0;
-                let afterTaxSalary = totalSalary;
-
-                if (taxType === "business") {
-                    taxAmount = totalSalary * 0.033; // 사업소득 세금
-                } else if (taxType === "employee") {
-                    const insuranceRate = 0.09; // 4대보험 비율 9%
-                    taxAmount = totalSalary * insuranceRate; // 4대보험 공제
+                    classRow.querySelector('.remove-class').addEventListener('click', function () {
+                        if (classContainer.childElementCount > 1) {
+                            classRow.remove();
+                        }
+                    });
+                    classRow.querySelector('.add-class').addEventListener('click', function () {
+                        // 수업 추가 시 원하는 로직을 추가하면 됩니다.
+                        createClassRow();
+                    });
                 }
 
-                afterTaxSalary = totalSalary - taxAmount;
+                createClassRow();
 
-                resultDiv.innerHTML = `
+                // 기본급 +- 5만원 버튼
+                document.getElementById('decrease-base').addEventListener('click', function () {
+                    let baseSalary = parseFloat(document.getElementById('base-salary').value);
+                    baseSalary = baseSalary - 50000;
+                    document.getElementById('base-salary').value = baseSalary;
+                    document.getElementById('base-salary-text').innerText = formatCurrency(baseSalary);
+                });
+
+                document.getElementById('increase-base').addEventListener('click', function () {
+                    let baseSalary = parseFloat(document.getElementById('base-salary').value);
+                    baseSalary = baseSalary + 50000;
+                    document.getElementById('base-salary').value = baseSalary;
+                    document.getElementById('base-salary-text').innerText = formatCurrency(baseSalary);
+                });
+
+                // 기타 인센티브 +- 5만원 버튼
+                document.getElementById('decrease-extra').addEventListener('click', function () {
+                    let extraIncome = parseFloat(document.getElementById('extra-income').value);
+                    extraIncome = extraIncome - 50000;
+                    document.getElementById('extra-income').value = extraIncome;
+                    document.getElementById('extra-income-text').innerText = formatCurrency(extraIncome);
+                });
+
+                document.getElementById('increase-extra').addEventListener('click', function () {
+                    let extraIncome = parseFloat(document.getElementById('extra-income').value);
+                    extraIncome = extraIncome + 50000;
+                    document.getElementById('extra-income').value = extraIncome;
+                    document.getElementById('extra-income-text').innerText = formatCurrency(extraIncome);
+                });
+
+                calculateBtn.addEventListener('click', function () {
+                    const baseSalary = parseFloat(document.getElementById('base-salary').value) || 0;
+                    const extraIncome = parseFloat(document.getElementById('extra-income').value) || 0;
+                    let totalClassIncome = 0;
+
+                    document.querySelectorAll('.class-row').forEach((row) => {
+                        const rate = parseFloat(row.querySelector('.class-rate').value) || 0;
+                        const fee = (parseFloat(row.querySelector('.class-fee').value) || 0) / 100;
+                        const count = parseInt(row.querySelector('.class-count').value) || 0;
+                        totalClassIncome += rate * fee * count;
+                    });
+
+                    let totalSalary = baseSalary + totalClassIncome + extraIncome;
+                    const taxType = document.querySelector("input[name='tax-type']:checked").value;
+
+                    let taxAmount = 0;
+                    let afterTaxSalary = totalSalary;
+
+                    if (taxType === 'business') {
+                        taxAmount = totalSalary * 0.033; // 사업소득 세금
+                    } else if (taxType === 'employee') {
+                        const insuranceRate = 0.09; // 4대보험 비율 9%
+                        taxAmount = totalSalary * insuranceRate; // 4대보험 공제
+                    }
+
+                    afterTaxSalary = totalSalary - taxAmount;
+
+                    resultDiv.innerHTML = `
                     <div class="title-left">
                         <h3>급여 상세 내역</h3>
                         <p>기본급: ${formatCurrency(baseSalary)}</p>
@@ -260,8 +264,8 @@
                         <p>세후: ${formatCurrency(afterTaxSalary)}</p>
                     </div>
                 `;
+                });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
